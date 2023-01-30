@@ -21,34 +21,8 @@ $blobs | ForEach-Object -Parallel {
 
     $copyuri = "https://dlsadventureworksdev.blob.core.windows.net/sample/" + $newpath + "?sv=2020-02-10&st=2023-01-30T15%3A32%3A18Z&se=2023-01-31T15%3A32%3A18Z&sr=c&sp=racwdlme&sig=Bsakh3X%2BKLMFjmh8%2BR7VScuOGjQ5%2FsGoXzIe2w5W5mY%3D"
     $deleteuri = "https://dlsadventureworksdev.blob.core.windows.net/sample/" + $oldPath + "?sv=2020-02-10&st=2023-01-30T15%3A32%3A18Z&se=2023-01-31T15%3A32%3A18Z&sr=c&sp=racwdlme&sig=Bsakh3X%2BKLMFjmh8%2BR7VScuOGjQ5%2FsGoXzIe2w5W5mY%3D"
-    $copyheaders = @{
-        'x-ms-date' = $lastModified
-        'x-ms-version' = '2019-12-12'
-        'x-ms-copy-source' = $deleteuri
-        'Content-Length' = '0'
-    }
-    $deleteheaders = @{
-        'x-ms-version' = '2019-12-12'
-    }
 
-    $folder = Get-AzDataLakeGen2Item -Context $ctx -FileSystem sample -Path $fullPath -ErrorAction SilentlyContinue
-
-	if ($null -eq $folder)
-	{
-		New-AzDataLakeGen2Item -Context $ctx -FileSystem sample -Path $fullPath -Directory -Force
-	}
-	
-	Move-AzDataLakeGen2Item -Context $ctx -FileSystem sample -Path $oldPath -DestFileSystem sample -DestPath $newPath -Force
+    Write-Host "The current location is " $deleteuri
+    Write-Host "The new location will be " $copyuri
 } -ThrottleLimit 1000
-
-<#
-try {
-    $put = Invoke-RestMethod -Uri $copyuri -Method Put -Headers $copyheaders
-    $delete = Invoke-RestMethod -Uri $deleteuri -Method Delete -Headers $deleteheaders
-    Write-Host "Move succeeded for blob " $oldPath
-}
-catch {
-    Write-Host "Move failed for blob: " $oldPath
-}
-#>
        
