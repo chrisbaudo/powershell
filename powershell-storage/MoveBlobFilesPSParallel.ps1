@@ -7,7 +7,7 @@ $xmldoc = [xml](Get-Content .\xmlresults.xml)
 $blobs = $xmldoc.SelectNodes("/EnumerationResults/Blobs/Blob")
 
 $blobs | ForEach-Object -Parallel {
-    $ctx = New-AzStorageContext -StorageAccountName 'dlsadventureworksdev' -StorageAccountKey '<storageaccountkey>'
+    $ctx = New-AzStorageContext -StorageAccountName '<storageaccountname>' -StorageAccountKey '<storageaccountkey>'
     $baseDirectory = "sectionrate/json/"
     $lastModified = Get-Date $_.Properties.'Last-Modified'
     $year = $lastModified.Year.ToString().PadLeft(2,'0')
