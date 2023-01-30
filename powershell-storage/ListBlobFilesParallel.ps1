@@ -1,4 +1,4 @@
-$listuri = "https://dlsadventureworksdev.blob.core.windows.net/sample?comp=list&prefix=sectionrate%2Fjson%2F&maxresults=1000&restype=container&include=metadata&delimiter=%2F&showonly=files&" + "sv=2020-02-10&st=2023-01-30T15%3A32%3A18Z&se=2023-01-31T15%3A32%3A18Z&sr=c&sp=racwdlme&sig=Bsakh3X%2BKLMFjmh8%2BR7VScuOGjQ5%2FsGoXzIe2w5W5mY%3D"
+$listuri = "https://<storageaccountname>.blob.core.windows.net/sample?comp=list&prefix=sectionrate%2Fjson%2F&maxresults=1000&restype=container&include=metadata&delimiter=%2F&showonly=files&" + "<saswithoutquestionmark>"
 $xmlresults = Invoke-RestMethod -Method 'Get' -Uri $listuri
 $xmlresults.Replace('ï»¿','') > .\xmlresults.xml
 
@@ -18,8 +18,8 @@ $blobs | ForEach-Object -Parallel {
 	$oldPath = $_.name
 	$newPath = $oldPath.Replace($baseDirectory,$fullPath)
 
-    $copyuri = "https://dlsadventureworksdev.blob.core.windows.net/sample/" + $newpath + "?sv=2020-02-10&st=2023-01-30T15%3A32%3A18Z&se=2023-01-31T15%3A32%3A18Z&sr=c&sp=racwdlme&sig=Bsakh3X%2BKLMFjmh8%2BR7VScuOGjQ5%2FsGoXzIe2w5W5mY%3D"
-    $deleteuri = "https://dlsadventureworksdev.blob.core.windows.net/sample/" + $oldPath + "?sv=2020-02-10&st=2023-01-30T15%3A32%3A18Z&se=2023-01-31T15%3A32%3A18Z&sr=c&sp=racwdlme&sig=Bsakh3X%2BKLMFjmh8%2BR7VScuOGjQ5%2FsGoXzIe2w5W5mY%3D"
+    $copyuri = "https://dlsadventureworksdev.blob.core.windows.net/sample/" + $newpath + "<saswithquestionmark>"
+    $deleteuri = "https://dlsadventureworksdev.blob.core.windows.net/sample/" + $oldPath + "<saswithquestionmark>"
 
     Write-Host "The current location is " $deleteuri
     Write-Host "The new location will be " $copyuri
