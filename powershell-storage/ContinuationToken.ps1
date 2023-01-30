@@ -1,5 +1,5 @@
-$storageAccountName = "dlsadventureworksdev"
-$resourceGroupName = "rg-adventureworks-dev-001"
+$storageAccountName = "<storageaccountname>"
+$resourceGroupName = "<resourcegroupname>"
 #--------------------------------------------------
 
 $storageAccount = Get-AzStorageAccount -ResourceGroupName $resourceGroupName -AccountName $storageAccountName
