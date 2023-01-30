@@ -1,5 +1,5 @@
 # Call the blob storage API which returns file list results in XML format
-$listuri = "https://dlsadventureworksdev.blob.core.windows.net/sample?comp=list&prefix=sectionrate%2Fjson%2F&maxresults=1000&restype=container&include=metadata&delimiter=%2F&showonly=files&sv=2020-02-10&st=2023-01-30T15%3A32%3A18Z&se=2023-01-31T15%3A32%3A18Z&sr=c&sp=racwdlme&sig=Bsakh3X%2BKLMFjmh8%2BR7VScuOGjQ5%2FsGoXzIe2w5W5mY%3D"
+$listuri = "https://<storageaccountname>.blob.core.windows.net/sample?comp=list&prefix=sectionrate%2Fjson%2F&maxresults=1000&restype=container&include=metadata&delimiter=%2F&showonly=files&<saswithoutquestionmark>"
 $xmlresults = Invoke-RestMethod -Method 'Get' -Uri $listuri
 $xmlresults.Replace('ï»¿','') > .\xmlresults.xml
 
@@ -10,9 +10,9 @@ $blobs = $xmldoc.SelectNodes("/EnumerationResults/Blobs/Blob")
 
 $blobs | ForEach-Object -Parallel {
     # Move files from the "baseDirectory" below to a timestamp folder based on last modified date
-    $baseUrl = "https://dlsadventureworksdev.blob.core.windows.net/sample/"
+    $baseUrl = "https://<storageaccountname>.blob.core.windows.net/sample/"
     $baseDirectory = "sectionrate/json/"
-    $sas = "?sv=2020-02-10&st=2023-01-30T15%3A32%3A18Z&se=2023-01-31T15%3A32%3A18Z&sr=c&sp=racwdlme&sig=Bsakh3X%2BKLMFjmh8%2BR7VScuOGjQ5%2FsGoXzIe2w5W5mY%3D"
+    $sas = "<saswithquestionmark>"
     $lastModified = Get-Date $_.Properties.'Last-Modified'
     $year = $lastModified.Year.ToString().PadLeft(2,'0')
 	$month = $lastModified.Month.ToString().PadLeft(2,'0')
