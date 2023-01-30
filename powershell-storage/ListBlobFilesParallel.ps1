@@ -18,8 +18,8 @@ $blobs | ForEach-Object -Parallel {
 	$oldPath = $_.name
 	$newPath = $oldPath.Replace($baseDirectory,$fullPath)
 
-    $copyuri = "https://dlsadventureworksdev.blob.core.windows.net/sample/" + $newpath + "<saswithquestionmark>"
-    $deleteuri = "https://dlsadventureworksdev.blob.core.windows.net/sample/" + $oldPath + "<saswithquestionmark>"
+    $copyuri = "https://<storageaccountname>.blob.core.windows.net/sample/" + $newpath + "<saswithquestionmark>"
+    $deleteuri = "https://<storageaccountname>.blob.core.windows.net/sample/" + $oldPath + "<saswithquestionmark>"
 
     Write-Host "The current location is " $deleteuri
     Write-Host "The new location will be " $copyuri
