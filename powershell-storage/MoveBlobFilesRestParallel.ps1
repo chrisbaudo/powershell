@@ -1,6 +1,6 @@
 # Call the blob storage API which returns file list results in XML format
 $sas = "<saswithoutquestionmark>"
-$listuri = "https://<storageaccountname>.blob.core.windows.net/sample?comp=list&prefix=sectionrate%2Fjson%2F&maxresults=1000&restype=container&include=metadata&delimiter=%2F&showonly=files&where=Last-Modified+%3e+%272023-02-01" + "&" + $sas
+$listuri = "https://<storageaccountname>.blob.core.windows.net/sample?comp=list&prefix=sectionrate%2Fjson%2F&maxresults=1000&restype=container&include=metadata&delimiter=%2F&showonly=files" + "&" + $sas
 $xmlresults = Invoke-RestMethod -Method 'Get' -Uri $listuri
 $xmlresults.Replace('ï»¿','') > .\xmlresults.xml
 
